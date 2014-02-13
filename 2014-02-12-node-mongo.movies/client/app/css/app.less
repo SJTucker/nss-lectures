@@ -1,4 +1,5 @@
 @bg-color: lightblue;
+@poster-height: 200px;
 
 body{
   background-color: @bg-color;
@@ -6,6 +7,11 @@ body{
 
 .poster{
   margin: 10px;
-  height: 200px;
-  width: 150px;
+  height: @poster-height;
+  width: @poster-height * .675;
+}
+
+.button{
+  position: relative;
+  top: 75px;
 }

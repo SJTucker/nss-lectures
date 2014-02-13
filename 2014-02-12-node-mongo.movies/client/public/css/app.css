@@ -4,5 +4,9 @@ body {
 .poster {
   margin: 10px;
   height: 200px;
-  width: 150px;
+  width: 135px;
+}
+.button {
+  position: relative;
+  top: 75px;
 }
