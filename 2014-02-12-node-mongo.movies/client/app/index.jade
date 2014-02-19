@@ -24,18 +24,15 @@ html(class='no-js', lang='en')
                 button#save Save Movie
               .small-9.columns
             .row
+              .small-6.columns
+                label Poster
+                  input(type='text', name='poster')
               .small-3.columns
                 label Name
                   input(type='text', name='name')
               .small-3.columns
                 label Rating
                   input(type='text', name='rating')
-              .small-3.columns
-                label Runtime
-                  input(type='text', name='runtime')
-              .small-3.columns
-                label Release Year
-                  input(type='text', name='release')
             .row
               .small-3.columns
                 label Studio
@@ -43,9 +40,12 @@ html(class='no-js', lang='en')
               .small-3.columns
                 label Director
                   input(type='text', name='director')
-              .small-6.columns
-                label Poster
-                  input(type='text', name='poster')
+              .small-3.columns
+                label Runtime
+                  input(type='text', name='runtime')
+              .small-3.columns
+                label Release Year
+                  input(type='text', name='release')
             .row
               .small-12.columns
                 label Actors

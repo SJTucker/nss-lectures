@@ -15,21 +15,56 @@ exports.create = function(req, res){
 exports.index = function(req, res){
   var db = req.app.locals.db;
   var movies = db.collection('movies');
-  movies = movies.find().toArray(function(err, movies){
+  movies.find().toArray(function(err, movies){
     res.send({movies:movies});
   });
 };
 
+
+
+
+
+/*exports.getMovie = function(req, res){
+  var db = req.app.locals.db;
+  var movies = db.collection('movies');
+  var id = mongodb.ObjectID(req.params.id);
+  console.log(id);
+  console.log(req.params.id);
+
+  movies.findOne({_id:id}, function (err, movies){
+    console.log(err);
+    console.log(movies);
+    res.send({movie:movies});
+  });
+  //console.log(movie);
+};*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.deleteMovie = function(req, res){
   var db = req.app.locals.db;
-  var id = new mongodb.ObjectID(req.params.id);
+  var id = mongodb.ObjectID(req.params.id);
   var movies = db.collection('movies');
   console.log(req.params.id);
   console.log(id);
   
   movies.remove({_id: id}, function(err, count){
-    console.log(count);
-    res.send({});
+    res.send({count: count, id: req.params.id});
   });
 };
 

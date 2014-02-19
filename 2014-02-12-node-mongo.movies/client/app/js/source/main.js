@@ -8,13 +8,36 @@
     $(document).foundation();
     $('#movie').submit(submitMovie);
     $('#movies').on('click', '.delete', deleteMovie);
+    $('#movies').on('click', '.edit', editMovie);
 
     getMovies();
   }
 
- // function findMovie(){
-    
- // }
+  function editMovie(){
+    //var data = $(this).parent().data('movie-id');
+    var $row = $(this).closest('tr');
+    console.log($row);
+    var url = $row.find('tr:nth-child(1)');
+    console.log(url);
+    var props= $row.find('td');
+    console.log(props);
+    var fields = $('#movie').find('input');
+    for(var i = 0; i < props.length; i++){
+      $(fields[i]).val(props[i].textContent);
+      console.log(fields[i]);
+      console.log(props[i]);
+      
+    }
+    console.log(name);
+   // for(var i = 0; i < row.length
+   // console.log(id);
+   // var url = window.location.origin.replace(/(\d){4}/g, '4000') + '/movies/'+id;
+  //  $.getJSON(url, function(data){
+  //    console.log(data);
+      //var name = data.movies.name;
+      //console.log(name);
+  //  });
+  }
 
   function deleteMovie(){
     var data = $(this).parent().data('movie-id');
@@ -43,6 +66,7 @@
   }
 
   function getMovies(){
+    $('#movies > tbody').empty();
     var url = window.location.origin.replace(/(\d){4}/g, '4000') + '/movies';
     $.getJSON(url, displayMovies);
   }
@@ -63,7 +87,8 @@
     var $actors = $('<td>');
     var $director = $('<td>');
     var $poster = $('<td><img src="' + movie.poster + '"></td>');
-    var $button = $('<input type="button" class="delete button small radius" value="Delete"></button>');
+    var $button1 = $('<input type="button" class="delete button small radius" value="Delete"></button>');
+    var $button2 = $('<input type="button" class="edit button small radius" value="Edit"></button>');
     $poster.addClass('poster');
 
     $name.text(movie.name);
@@ -77,11 +102,12 @@
     
 
     
-    $container.append($poster, $name, $rating, $runtime, $release, $studio, $actors, $director, $button);
+    $container.append($poster, $name, $rating, $studio, $director, $runtime, $release, $actors, $button1, $button2);
     $('tbody').append($container);
 
   
   }
+
 
 
 })();
