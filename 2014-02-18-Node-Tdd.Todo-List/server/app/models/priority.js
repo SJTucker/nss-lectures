@@ -7,20 +7,18 @@ var Mongo = require('mongodb');
 function Priority(priority){
   this._id = priority._id;
   this.name = priority.name;
-  this._value = parseInt(priority.value);
+  this.value = parseInt(priority.value);
 }
 
 Priority.prototype.save = function(fn){
   var self = this;
 
-  if(this._id){
-    priorities.save({_id:this._id}, this, function(err,record){
-      fn(new Priority(record));
+  if(self._id){
+    priorities.save(self, function(err, record){
+      fn(err);
     });
-  }
-
-  else{
-    Priority.findByName(this.name, function(priority){
+  }else{
+    Priority.findByName(self.name, function(priority){
       if(!priority){
         priorities.save(self, function(err, record){
           fn(err);
@@ -30,6 +28,13 @@ Priority.prototype.save = function(fn){
       }
     });
   }
+};
+
+Priority.deleteById = function(id, fn){
+  var _id = Mongo.ObjectID(id);
+  priorities.remove({_id:_id}, function(err, count){
+    fn(count);
+  });
 };
 
 Priority.findAll = function(fn){
@@ -55,10 +60,3 @@ Object.defineProperty(Priority.prototype, 'value', {
   get: function(){return this._value;},
   set: function(value){this._value = parseInt(value);}
 });
-
-Priority.deleteById = function(id, fn){
-  var _id = Mongo.ObjectID(id);
-  priorities.remove({_id:_id}, function(err, count){
-    fn(count);
-  });
-};
