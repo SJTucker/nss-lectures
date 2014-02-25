@@ -9,6 +9,7 @@ var connectMongo = require('./lib/connect');
 var express = require('express');
 var home = require('./routes/home');
 var priorities = require('./routes/priorities');
+var tasks = require('./routes/tasks');
 var app = express();
 
 /* --- pipeline begins */
@@ -22,9 +23,16 @@ app.use(app.router);
 app.get('/', d, home.index);
 app.post('/priorities', d, priorities.create);
 app.get('/priorities', d, priorities.index);
+app.get('/priorities?', d, priorities.index);
 app.get('/priorities/:id', d, priorities.show);
 app.put('/priorities/:id', d, priorities.update);
 app.del('/priorities/:id', d, priorities.destroy);
+app.post('/tasks', d, tasks.create);
+app.get('/tasks', d, tasks.index);
+app.get('/tasks?', d, tasks.index);
+app.get('/tasks/:search/:id', d, tasks.show);
+app.put('/tasks/:id', d, tasks.update);
+app.del('/tasks/:id', d, tasks.destroy);
 /* --- pipeline ends   */
 
 var server = require('http').createServer(app);

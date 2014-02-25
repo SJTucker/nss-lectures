@@ -47,4 +47,3 @@ exports.destroy = function(req, res){
 function init(){
   Priority = global.nss.Priority;
 }
-

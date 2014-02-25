@@ -55,8 +55,3 @@ Priority.findById = function(id, fn){
     fn(record ? new Priority(record) : null);
   });
 };
-
-Object.defineProperty(Priority.prototype, 'value', {
-  get: function(){return this._value;},
-  set: function(value){this._value = parseInt(value);}
-});
